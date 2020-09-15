@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="77b4f754ccad49b1b6fb5a7b58bf86b5" Name="Diagram1">
+        <EntityTypeShape EntityType="squekMod.Karyawan" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="squekMod.Kendaraan" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="squekMod.Member" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="squekMod.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="squekMod.Transaksi" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="squekMod.FK_Transaksi_Karyawan" ManuallyRouted="false" />
+        <AssociationConnector Association="squekMod.FK_Transaksi_Kendaraan" ManuallyRouted="false" />
+        <AssociationConnector Association="squekMod.FK_Transaksi_Member" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

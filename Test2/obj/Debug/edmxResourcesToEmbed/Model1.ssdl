@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="squekMod.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Karyawan">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nama" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Alamat" Type="varchar(max)" Nullable="false" />
+    <Property Name="NoTelp" Type="varchar" MaxLength="16" Nullable="false" />
+    <Property Name="NoKTP" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Role" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Kendaraan">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Merk" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Jenis" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Tahun" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="Plat" Type="varchar" MaxLength="16" Nullable="false" />
+    <Property Name="HargaHari" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="HargaJam" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nama" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Alamat" Type="varchar(max)" Nullable="false" />
+    <Property Name="NoTelp" Type="varchar" MaxLength="16" Nullable="false" />
+    <Property Name="Pekerjaan" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="NoKTP" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Transaksi">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_kendaraan" Type="int" Nullable="false" />
+    <Property Name="id_member" Type="int" Nullable="false" />
+    <Property Name="id_karyawan" Type="int" Nullable="false" />
+    <Property Name="TanggalMenyewa" Type="date" Nullable="false" />
+    <Property Name="TanggalAkhir" Type="varchar" MaxLength="50" />
+    <Property Name="WaktuMenyewa" Type="varchar" MaxLength="5" />
+    <Property Name="WaktuSewa" Type="varchar" MaxLength="5" />
+    <Property Name="JumlahBayar" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Transaksi_Karyawan">
+    <End Role="Karyawan" Type="Self.Karyawan" Multiplicity="1" />
+    <End Role="Transaksi" Type="Self.Transaksi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Karyawan">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Transaksi">
+        <PropertyRef Name="id_karyawan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transaksi_Kendaraan">
+    <End Role="Kendaraan" Type="Self.Kendaraan" Multiplicity="1" />
+    <End Role="Transaksi" Type="Self.Transaksi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kendaraan">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Transaksi">
+        <PropertyRef Name="id_kendaraan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transaksi_Member">
+    <End Role="Member" Type="Self.Member" Multiplicity="1" />
+    <End Role="Transaksi" Type="Self.Transaksi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Transaksi">
+        <PropertyRef Name="id_member" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="squekModStoreContainer">
+    <EntitySet Name="Karyawan" EntityType="Self.Karyawan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Kendaraan" EntityType="Self.Kendaraan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Transaksi" EntityType="Self.Transaksi" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Transaksi_Karyawan" Association="Self.FK_Transaksi_Karyawan">
+      <End Role="Karyawan" EntitySet="Karyawan" />
+      <End Role="Transaksi" EntitySet="Transaksi" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transaksi_Kendaraan" Association="Self.FK_Transaksi_Kendaraan">
+      <End Role="Kendaraan" EntitySet="Kendaraan" />
+      <End Role="Transaksi" EntitySet="Transaksi" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transaksi_Member" Association="Self.FK_Transaksi_Member">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="Transaksi" EntitySet="Transaksi" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
